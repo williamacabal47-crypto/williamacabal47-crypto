@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+	body {
+		background-color: #F3E3A5;
+		color: #604936;
+	}
+	
+	h1 {
+		color: #52633A;	
+
+	}
+	
+	h2 {
+		color: #65784A;
+	
+	}
+
+	</style>
+
+<style>
+
+#entrada {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #f8e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.sobre {
+    text-align: center;
+    padding: 30px;
+}
+
+.sobre h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.sobre p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.sobre button {
+    font-size: 20px;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#entrada.salir {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.foto-recuerdo {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.foto-recuerdo img {
+    width: 300px;
+    max-width: 80%;
+    padding: 12px 12px 35px 12px;
+    background-color: #fffdf5;
+    box-shadow: 0 5px 15px rgba(60, 45, 30, 0.25);
+    transform: rotate(-2deg);
+}
+
+.fecha {
+    margin-bottom: 15px;
+    color: #65784A;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+.pie-foto {
+    margin-top: -25px;
+    color: #604936;
+    font-size: 15px;
+    font-style: italic;
+}
+.roblox img {
+    transform: rotate(2deg);
+}
+.roblox .pie-foto {
+    margin-top: 15px;
+}
+	
+.creditos {
+    text-align: center;
+    margin: 90px auto 60px;
+}
+
+.titulo-recuerdos {
+    color: #65784A;
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin-bottom: 45px;
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    max-width: 1000px;
+    margin: auto;
+}
+.foto-oculta {
+    width: 240px;
+    height: 240px;
+    position: relative;
+    cursor: pointer;
+
+}
+
+.revelar {
+    width: 240px;
+    height: 240px;
+    border: none;
+    background-color: #fffdf5;
+    box-shadow: 0 5px 14px rgba(60, 45, 30, 0.25);
+    cursor: pointer;
+    font-size: 32px;
+    color: #65784A;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.revelar:hover {
+    transform: scale(1.04) rotate(-1deg);
+    box-shadow: 0 8px 18px rgba(60, 45, 30, 0.30);
+}
+
+.foto-oculta img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    padding: 10px 10px 28px 10px;
+    box-sizing: border-box;
+    background-color: #fffdf5;
+    box-shadow: 0 5px 14px rgba(60, 45, 30, 0.25);
+    opacity: 0;
+    transform: scale(0.7) rotate(0deg);
+    animation: aparecerFoto 0.7s ease forwards;
+}
+
+@keyframes aparecerFoto {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) rotate(0deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.05) rotate(-2deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(-2deg);
+    }
+}
+
+.foto-oculta:nth-child(2n) img {
+    animation-name: aparecerFoto2;
+}
+
+@keyframes aparecerFoto2 {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) rotate(0deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.05) rotate(3deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(3deg);
+    }
+}
+
+.fin {
+    margin-top: 55px;
+    color: #604936;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.hojita {
+    position: fixed;
+    top: -30px;
+    color: #65784A;
+    font-size: 18px;
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 10000;
+    animation: caerHojita linear forwards;
+}
+
+@keyframes caerHojita {
+
+    0% {
+        transform: translateY(-30px) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: translateY(50vh) translateX(40px) rotate(180deg);
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(-40px) rotate(360deg);
+        opacity: 0;
+    }
+}
+/* ✦ Partículas flotantes */
+
+.particula {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #65784A;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    animation: flotarParticula linear forwards;
+}
+
+@keyframes flotarParticula {
+
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.35;
+    }
+
+    50% {
+        transform: translateY(-40px) translateX(20px);
+        opacity: 0.25;
+    }
+
+    100% {
+        transform: translateY(-100px) translateX(-20px);
+        opacity: 0;
+    }
+}
+.luz {
+    position: fixed;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #fff4b8;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10000;
+    box-shadow: 0 0 10px #fff4b8;
+    animation: aparecerLuz ease-in-out forwards;
+}
+
+@keyframes aparecerLuz {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    25% {
+        opacity: 0.9;
+        transform: scale(1.2);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    75% {
+        opacity: 0.8;
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+/* ♡ Corazones flotantes */
+
+.corazon-flotante {
+    position: fixed;
+    color: #9b5960;
+    font-size: 20px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    animation: flotarCorazon ease-in-out forwards;
+}
+
+@keyframes flotarCorazon {
+
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.6) rotate(-10deg);
+    }
+
+    20% {
+        opacity: 0.75;
+        transform: translateY(0) scale(1) rotate(5deg);
+    }
+
+    50% {
+        opacity: 0.65;
+        transform: translateY(-50px) translateX(20px) scale(1.05) rotate(-5deg);
+    }
+
+    80% {
+        opacity: 0.45;
+        transform: translateY(-90px) translateX(-15px) scale(0.95) rotate(8deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-130px) translateX(10px) scale(0.7) rotate(-5deg);
+    }
+}
+</style>
+
+	<title> LO QUE SIENTO POR TI</title>
+
+</head>
+
+<body>
+<div id="entrada">
+    <div class="sobre">
+        <div class="corazones">♡ ♡ ♡</div>
+
+        <h1>Hay algo que quiero contarte...</h1>
+
+        <p>Pero primero, tienes que abrirlo.</p>
+
+        <button id="botonAbrir">Abrir ♥️</button>
+    </div>
+</div>
+<audio id="musica" loop>
+    <source src="baile-inolvidable.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const boton = document.getElementById("botonAbrir");
+const entrada = document.getElementById("entrada");
+const musica = document.getElementById("musica");
+
+musica.volume = 0.18;
+
+boton.addEventListener("click", function() {
+
+    entrada.classList.add("salir");
+
+    musica.play();
+
+});
+</script>
+
+<script>
+
+function revelarFoto(boton, nombreFoto) {
+
+    const contenedor = boton.parentElement;
+
+    const imagen = document.createElement("img");
+
+    imagen.src = nombreFoto;
+    imagen.alt = "Nuestro recuerdo";
+
+    boton.remove();
+
+    contenedor.appendChild(imagen);
+}
+
+</script>
+
+<script>
+
+let posicionHojita = 0;
+
+function crearHojita() {
+
+    const hojita = document.createElement("div");
+
+    hojita.className = "hojita";
+    hojita.textContent = "🍃";
+
+    // Reparte las hojas por toda la pantalla
+    posicionHojita += 1;
+
+    const posiciones = [5, 15, 25, 35, 45, 55, 65, 75, 85, 95];
+
+    hojita.style.left = posiciones[posicionHojita % posiciones.length] + "vw";
+
+    // Tamaño ligeramente diferente
+    hojita.style.fontSize = (16 + Math.random() * 7) + "px";
+
+    // Ahora caen mucho más lentamente
+    hojita.style.animationDuration = (15 + Math.random() * 7) + "s";
+
+    document.body.appendChild(hojita);
+
+    setTimeout(function() {
+        hojita.remove();
+    }, 23000);
+}
+
+crearHojita();
+
+setInterval(crearHojita, 2500);
+
+</script>
+
+<script>
+
+function crearParticula() {
+
+    const particula = document.createElement("div");
+
+    particula.className = "particula";
+
+    particula.style.left = Math.random() * 100 + "vw";
+    particula.style.top = (20 + Math.random() * 70) + "vh";
+
+    particula.style.animationDuration = (6 + Math.random() * 5) + "s";
+
+    document.body.appendChild(particula);
+
+    setTimeout(function() {
+        particula.remove();
+    }, 11000);
+}
+
+setInterval(crearParticula, 1800);
+
+</script>
+
+<script>
+
+function crearLuz() {
+
+    const luz = document.createElement("div");
+
+    luz.className = "luz";
+
+    luz.style.left = (5 + Math.random() * 90) + "vw";
+    luz.style.top = (10 + Math.random() * 80) + "vh";
+
+    luz.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+    document.body.appendChild(luz);
+
+    setTimeout(function() {
+        luz.remove();
+    }, 9000);
+}
+
+crearLuz();
+setInterval(crearLuz, 1500);
+
+</script>
+
+<script>
+
+function crearCorazon() {
+
+    const corazon = document.createElement("div");
+
+    corazon.className = "corazon-flotante";
+
+    corazon.textContent = "♡";
+
+    corazon.style.left = (5 + Math.random() * 90) + "vw";
+    corazon.style.top = (25 + Math.random() * 60) + "vh";
+
+    corazon.style.fontSize = (18 + Math.random() * 10) + "px";
+
+    corazon.style.animationDuration = (7 + Math.random() * 4) + "s";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(function() {
+        corazon.remove();
+    }, 12000);
+}
+
+
+function grupoCorazones() {
+
+    crearCorazon();
+
+    setTimeout(function() {
+        crearCorazon();
+    }, 700);
+
+    setTimeout(function() {
+        crearCorazon();
+    }, 1400);
+}
+
+
+grupoCorazones();
+
+setInterval(grupoCorazones, 7000);
+
+</script>
+
+
+	<h1>lO QUE SIENTO POR TI</h1>
+	<h2>El comienzo de nuestra historia</h2>
+
+
+<p> Esa tarde del 5 de septiembre no pensé que llegaría a ser tan especial en mi vida. Creí que sería un día normal y olvidable;nunca me imaginé que encontraría al amor de mi vida en un baile que,para mí,terminó convirtiéndose en un momento inolvidable.
+
+iba sin ningún pensamiento de bailar y mucho menos de encontrar a alguien. Por eso fue tan inesperado que llegaras a mí y comenzáramos a bailar. Esa tarde contigo fue muy especial para mí. Desde  ese día no te pude olvidar;te veías tan linda y,cuando llegó el momento de despedirno,pensé que sería la última vez que te vería, que todo quedaría simplemente en un baile.
+
+Pero me gustaste desde ese día y tuve el valor de escribirte. Sin saber todo lo que vendría después,nunca imaginé que llegaríamos a construir todo esto que tenemos hoy. 
+</p>
+
+<div class="foto-recuerdo">
+
+    <div class="fecha">05 • SEPTIEMBRE • 2025</div>
+
+    <img src="bailepopis.jpeg" alt="Nuestro primer recuerdo">
+
+    <div class="pie-foto">El día en que comenzó todo.</div>
+
+</div>
+
+
+	<h2>Me enamore de tí</h2>
+
+
+<p> Al principio nuestras conversaciones eran bastante básicas. Yo ni siquiera sabía muy bien cómo hablarte o cómo sacar nuevos temas, pero tuvimos la suerte de coincidir en algo: Roblox.
+Empezamos a jugar y, sin darnos cuenta, esos juegos se convirtieron en una de las primeras formas en las que realmente comenzamos a conocernos. Jugamos tantos que todavía recuerdo algunos con mucho cariño: los obbys, el juego del ciervo, el de la rueda que hizo que habláramos muchísimo… y tantas noches en las que terminábamos desvelándonos hasta las 2 o 3 de la mañana solamente por seguir hablando y jugando juntos.
+Desde el primer día me gustaste, pero cada vez encontraba una razón más para enamorarme de ti. En la escuela casi no hablábamos al principio, pero en las salidas empezamos a acercarnos de la nada. Me hablabas, te despedías de mí y, a veces, simplemente me mirabas con esos ojos tan lindos que terminaron enamorándome todavía más.
+Me encantaba hablar contigo, aunque fueran solamente unos minutos. Me enamoré de lo intensa que eres, de lo linda y atenta que puedes ser, de cómo jugabas, de cómo te reías y de cómo seguías mis bromas. Contigo me sentía seguro. Sentía que conectábamos de una manera muy bonita, que coincidíamos en muchas cosas y que podía disfrutar cualquier momento, por pequeño que fuera, si era contigo.
+Y pasó todo tan rápido que hasta a mí me sorprendió. En tan solo una semana ya estabas constantemente en mi mente. Me emocionaba verte cada tarde y me parecía imposible no fijarme en lo hermosa que te veías. Tu llegada a mi vida fue completamente inesperada, pero también fue muy fácil enamorarme de ti.
+Llegó un punto en el que ya no quería seguir guardándome todo lo que sentía. Quería poder quererte como realmente quería, demostrarte todo ese cariño que había ido creciendo dentro de mí y dejar de imaginar cómo sería tenerte a mi lado.
+Entonces llegó la tarde del 12 de septiembre.
+Ese día te pedí que fueras mi novia, y puedo decir que fue uno de los días más felices de mi vida. Cuando me abrazaste y me besaste por primera vez, sentí algo que todavía recuerdo perfectamente: no quería que ese momento terminara y no quería alejarme de ti.
+En ese momento entendí que aquella persona que había conocido inesperadamente en un baile ya se había convertido en alguien con quien quería compartir muchísimo más que unos cuantos días.
+Quería estar contigo. Y todavía quiero seguir estando contigo por todo el tiempo que la vida nos permita. 
+</p>
+
+<div class="foto-recuerdo roblox">
+
+    <div class="fecha">12 • SEPTIEMBRE • 2025</div>
+
+    <img src="Roblox.jpeg" alt="nuestros primeros dias">
+
+    <div class="pie-foto">Y sin darnos cuenta, empezamos a crear nuestra historia.</div>
+
+</div>
+
+
+	<h2>lo que eres para mi</h2>
+
+
+<p> Amo todo de ti: tus ojos, tu boca, tu sonrisa, tu risa, tus rizos, la forma en que me tratas, tus ocurrencias, tu manera de ser y lo amable y considerada que eres. Amo cada una de esas cosas que te hacen ser tú.
+
+Has cambiado tantas cosas en mí. Me has ayudado a cambiar mi manera de expresarme, a ser más yo contigo, a aprender a enseñarte lo que siento y no solamente decirlo. Quiero seguir siendo mejor por ti y dar todo lo que pueda, porque quiero que seas tú con quien comparta mi vida.
+
+Amo todas las anécdotas que hemos creado y cada una de las ocurrencias que nos han pasado juntos. Algunas veces, en el momento, me muero de pena, pero cuando las recuerdo termino enamorándome todavía más de ti. Porque, a pesar de todas nuestras tonterías, tú te ríes, las compartes conmigo y sigues a mi lado.
+
+Hemos tenido problemas, como cualquier pareja, pero siempre encontramos la manera de solucionarlos. Nunca duramos demasiado tiempo peleados porque, de alguna forma, siempre terminamos buscándonos y arreglando las cosas. Y creo que eso también forma parte de lo que somos.
+
+Me siento seguro contigo y cada día me das más confianza, porque sé que estás para mí. En estos 385 días contigo he llegado a amar todo lo que somos: todo lo que hemos hecho juntos, la manera en que nos tratamos, cómo solucionamos las cosas y la forma en que sigues demostrándome tu amor.
+
+Nunca quiero separarme de ti. Quiero seguir contigo, seguir mejorando, cumplir todo aquello que nos propongamos y apoyarnos mutuamente como siempre lo hemos hecho. Quiero seguir teniendo más momentos contigo, incluso esas anécdotas vergonzosas que algún día podremos recordar y de las que seguramente terminaremos riéndonos juntos.
+
+Quiero celebrar todas las fechas especiales a tu lado, seguir creando recuerdos y estar tan unidos que nuestra historia se quede con nosotros hasta donde nos dé la luz de la vida.
+
+Y después de todo...
+
+Siempre voy a amar aquel 5 de septiembre. Ese baile que para mí se volvió inolvidable, porque fue el comienzo de nosotros.
+
+Nunca imaginé que una tarde cualquiera terminaría convirtiéndose en el inicio de una historia que hoy significa tanto para mí.
+
+Y si pudiera volver a aquel día, sin saber todo lo que vendría después, volvería a elegir ese baile.
+
+Volvería a elegir encontrarte a ti.
+</p>
+<div class="galeria">
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto1.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto2.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto3.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto4.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto5.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto6.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto7.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto8.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto9.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto10.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto11.jpeg')">♡</button>
+    </div>
+
+    <div class="foto-oculta">
+        <button class="revelar" onclick="revelarFoto(this, 'Foto12.jpeg')">♡</button>
+    </div>
+
+</div>
